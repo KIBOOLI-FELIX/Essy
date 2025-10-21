@@ -1,463 +1,902 @@
-<!doctype html>
+<!DOCTYPE html>
 <html lang="en">
-<head>
-  <meta charset="utf-8" />
-  <meta name="viewport" content="width=device-width,initial-scale=1" />
-  <title>Essy — Silver Jubilee</title>
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Essy — Silver Jubilee</title>
 
-  <!-- Fonts -->
-  <link rel="preconnect" href="https://fonts.googleapis.com">
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;700&family=Dancing+Script:wght@400;700&family=Inter:wght@300;400;600&display=swap" rel="stylesheet">
+    <!-- Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;700&family=Dancing+Script:wght@400;700&family=Inter:wght@300;400;600&display=swap"
+      rel="stylesheet"
+    />
 
-  <style>
-    :root{
-      --bg1:#071028;
-      --bg2:#2b1438;
-      --silver:#E6E6EA;
-      --gold:#FFDFA8;
-      --muted:#B6C0C8;
-      --ember:#ff8a2d; /* ember orange */
-      --glass: rgba(255,255,255,0.03);
-    }
-    *{box-sizing:border-box}
-    html,body{height:100%;margin:0;font-family:Inter,system-ui,Segoe UI,Roboto,"Helvetica Neue",Arial;color:var(--silver);background:
-      radial-gradient(900px 400px at 10% 8%, rgba(255,230,180,0.03), transparent),
-      linear-gradient(180deg,var(--bg1),var(--bg2));overflow:hidden;-webkit-font-smoothing:antialiased;text-rendering:optimizeLegibility}
+    <style>
+      :root {
+        --bg1: #071028;
+        --bg2: #2b1438;
+        --silver: #e6e6ea;
+        --gold: #ffdfa8;
+        --muted: #b6c0c8;
+        --ember: #ff8a2d; /* ember orange */
+        --glass: rgba(255, 255, 255, 0.03);
+      }
+      * {
+        box-sizing: border-box;
+      }
+      html,
+      body {
+        height: 100%;
+        margin: 0;
+        font-family: Inter, system-ui, Segoe UI, Roboto, "Helvetica Neue", Arial;
+        color: var(--silver);
+        background: radial-gradient(
+            900px 400px at 10% 8%,
+            rgba(255, 230, 180, 0.03),
+            transparent
+          ),
+          linear-gradient(180deg, var(--bg1), var(--bg2));
+        overflow: auto;
+        -webkit-font-smoothing: antialiased;
+        text-rendering: optimizeLegibility;
+      }
 
-    /* layout */
-    .wrap{position:relative;min-height:100vh;display:flex;align-items:center;justify-content:center;padding:24px}
-    .card{width:100%;max-width:980px;padding:36px;border-radius:14px;text-align:center;position:relative;z-index:6;transform:translateY(-10vh)}
+      /* layout */
+      .wrap {
+        position: relative;
+        min-height: 100vh;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        padding: 16px;
+      }
+      .card {
+        width: 100%;
+        max-width: 980px;
+        padding: 24px;
+        border-radius: 14px;
+        text-align: center;
+        position: relative;
+        z-index: 6;
+      }
 
-    /* big 25 centerpiece */
-    .centerpiece{position:relative;display:grid;place-items:center;height:360px;margin-top:-40px}
-    .num25{font-family:'Playfair Display';font-size:220px;line-height:0.85;color:transparent;-webkit-text-stroke:1.6px rgba(255,255,255,0.12);position:relative;transform-style:preserve-3d;will-change:transform}
-    .num25 .fill{
-      position:absolute;inset:0;
-      background:linear-gradient(90deg,#f6f7f9,#cfcfd6);
-      -webkit-background-clip:text;background-clip:text;color:transparent;
-      filter:drop-shadow(0 8px 26px rgba(0,0,0,0.6));
-      display:flex;align-items:center;justify-content:center;
-    }
-    .num25 .orbit{
-      position:absolute;left:50%;top:50%;width:420px;height:420px;border-radius:50%;
-      transform:translate(-50%,-50%);pointer-events:none;z-index:0;opacity:0.45
-    }
+      /* big 25 centerpiece */
+      .centerpiece {
+        position: relative;
+        display: grid;
+        place-items: center;
+        height: 280px;
+        margin-top: -20px;
+      }
+      .num25 {
+        font-family: "Playfair Display";
+        font-size: clamp(100px, 25vw, 180px);
+        line-height: 0.85;
+        color: transparent;
+        -webkit-text-stroke: 1.2px rgba(255, 255, 255, 0.12);
+        position: relative;
+        transform-style: preserve-3d;
+        will-change: transform;
+      }
+      .num25 .fill {
+        position: absolute;
+        inset: 0;
+        background: linear-gradient(90deg, #f6f7f9, #cfcfd6);
+        -webkit-background-clip: text;
+        background-clip: text;
+        color: transparent;
+        filter: drop-shadow(0 8px 26px rgba(0, 0, 0, 0.6));
+        display: flex;
+        align-items: center;
+        justify-content: center;
+      }
+      .num25 .orbit {
+        position: absolute;
+        left: 50%;
+        top: 50%;
+        width: clamp(300px, 50vw, 400px);
+        height: clamp(300px, 50vw, 400px);
+        border-radius: 50%;
+        transform: translate(-50%, -50%);
+        pointer-events: none;
+        z-index: 0;
+        opacity: 0.45;
+      }
 
-    /* shimmer bar that sweeps across 25 */
-    .num25 .shine{position:absolute;inset:0;background:linear-gradient(120deg, rgba(255,255,255,0), rgba(255,255,255,0.22), rgba(255,255,255,0));transform:translateX(-220%);opacity:0.95;mix-blend-mode:screen}
+      /* shimmer bar that sweeps across 25 */
+      .num25 .shine {
+        position: absolute;
+        inset: 0;
+        background: linear-gradient(
+          120deg,
+          rgba(255, 255, 255, 0),
+          rgba(255, 255, 255, 0.22),
+          rgba(255, 255, 255, 0)
+        );
+        transform: translateX(-220%);
+        opacity: 0.95;
+        mix-blend-mode: screen;
+      }
 
-    /* halo behind */
-    .halo{position:absolute;width:560px;height:560px;border-radius:50%;left:50%;top:40%;transform:translate(-50%,-50%);background:
-      radial-gradient(circle at 40% 40%, rgba(255,235,180,0.06), rgba(255,235,180,0.02) 20%, transparent 45%);filter:blur(40px);z-index:2}
+      /* halo behind */
+      .halo {
+        position: absolute;
+        width: clamp(300px, 60vw, 500px);
+        height: clamp(300px, 60vw, 500px);
+        border-radius: 50%;
+        left: 50%;
+        top: 40%;
+        transform: translate(-50%, -50%);
+        background: radial-gradient(
+          circle at 40% 40%,
+          rgba(255, 235, 180, 0.06),
+          rgba(255, 235, 180, 0.02) 20%,
+          transparent 45%
+        );
+        filter: blur(40px);
+        z-index: 2;
+      }
 
-    /* headings and verse */
-    h1{font-family:'Dancing Script', 'Playfair Display';font-size:42px;margin:10px 0;color:var(--gold);text-shadow:0 6px 18px rgba(0,0,0,0.6)}
-    .subtitle{font-size:15px;color:var(--muted);margin-top:6px}
-    .verseBox{margin-top:16px;background:linear-gradient(180deg, rgba(255,255,255,0.01), rgba(255,255,255,0.005));padding:16px;border-radius:12px;border:1px solid var(--glass);max-width:780px;margin-left:auto;margin-right:auto}
-    .verseText{font-family:'Playfair Display';font-size:20px;line-height:1.45;color:#fbfbfd}
-    .verseRef{color:var(--muted);margin-top:8px;display:block}
+      /* headings and verse */
+      h1 {
+        font-family: "Dancing Script", "Playfair Display";
+        font-size: clamp(28px, 8vw, 40px);
+        margin: 10px 0;
+        color: var(--gold);
+        text-shadow: 0 6px 18px rgba(0, 0, 0, 0.6);
+      }
+      .subtitle {
+        font-size: clamp(12px, 3.5vw, 14px);
+        color: var(--muted);
+        margin-top: 6px;
+      }
+      .verseBox {
+        margin-top: 16px;
+        background: linear-gradient(
+          180deg,
+          rgba(255, 255, 255, 0.01),
+          rgba(255, 255, 255, 0.005)
+        );
+        padding: 12px;
+        border-radius: 12px;
+        border: 1px solid var(--glass);
+        max-width: 90%;
+        margin-left: auto;
+        margin-right: auto;
+      }
+      .verseText {
+        font-family: "Playfair Display";
+        font-size: clamp(14px, 4vw, 18px);
+        line-height: 1.45;
+        color: #fbfbfd;
+      }
+      .verseRef {
+        color: var(--muted);
+        margin-top: 8px;
+        display: block;
+        font-size: clamp(12px, 3.5vw, 14px);
+      }
 
-    .dedication{margin-top:18px;font-size:16px;color:#f6f4f8;max-width:760px;margin-left:auto;margin-right:auto;padding:6px 12px}
+      .dedication {
+        margin-top: 18px;
+        font-size: clamp(12px, 3.8vw, 15px);
+        color: #f6f4f8;
+        max-width: 90%;
+        margin-left: auto;
+        margin-right: auto;
+        padding: 6px 12px;
+      }
 
-    /* footer + swarmer heart */
-    footer{position:fixed;left:18px;bottom:12px;font-size:14px;z-index:8;display:flex;align-items:center;gap:8px;color:var(--muted)}
-    .swarmer{
-      width:36px;height:36px;border-radius:50%;display:inline-grid;place-items:center;background:linear-gradient(135deg,#ffb77a,#ff6b2d);box-shadow:0 10px 30px rgba(255,125,42,0.12);transform-origin:center;animation:swarmpulse 1800ms ease-in-out infinite;
-    }
-    @keyframes swarmpulse{
-      0%{transform:scale(1);filter:drop-shadow(0 6px 18px rgba(255,125,42,0.14));opacity:0.88}
-      50%{transform:scale(1.22);filter:drop-shadow(0 20px 40px rgba(255,125,42,0.18));opacity:1}
-      100%{transform:scale(1);opacity:0.88}
-    }
+      /* footer + swarmer heart */
+      footer {
+        position: fixed;
+        left: 12px;
+        bottom: 12px;
+        font-size: clamp(12px, 3.2vw, 13px);
+        z-index: 8;
+        display: flex;
+        align-items: center;
+        gap: 6px;
+        color: var(--muted);
+      }
+      .swarmer {
+        width: clamp(28px, 8vw, 32px);
+        height: clamp(28px, 8vw, 32px);
+        border-radius: 50%;
+        display: inline-grid;
+        place-items: center;
+        background: linear-gradient(135deg, #ffb77a, #ff6b2d);
+        box-shadow: 0 10px 30px rgba(255, 125, 42, 0.12);
+        transform-origin: center;
+        animation: swarmpulse 1800ms ease-in-out infinite;
+      }
+      @keyframes swarmpulse {
+        0% {
+          transform: scale(1);
+          filter: drop-shadow(0 6px 18px rgba(255, 125, 42, 0.14));
+          opacity: 0.88;
+        }
+        50% {
+          transform: scale(1.22);
+          filter: drop-shadow(0 20px 40px rgba(255, 125, 42, 0.18));
+          opacity: 1;
+        }
+        100% {
+          transform: scale(1);
+          opacity: 0.88;
+        }
+      }
 
-    /* buttons */
-    .controls{display:flex;gap:12px;justify-content:center;margin-top:18px}
-    .btn{background:linear-gradient(180deg, rgba(255,255,255,0.06), rgba(255,255,255,0.02));padding:10px 16px;border-radius:999px;font-weight:600;border:1px solid rgba(255,255,255,0.04);cursor:pointer;color:var(--gold)}
-    .btn.ghost{background:transparent;border:1px solid rgba(255,255,255,0.06);color:var(--muted)}
+      /* buttons */
+      .controls {
+        display: flex;
+        gap: 10px;
+        justify-content: center;
+        margin-top: 16px;
+        flex-wrap: wrap;
+      }
+      .btn {
+        background: linear-gradient(
+          180deg,
+          rgba(255, 255, 255, 0.06),
+          rgba(255, 255, 255, 0.02)
+        );
+        padding: 8px 14px;
+        border-radius: 999px;
+        font-weight: 600;
+        border: 1px solid rgba(255, 255, 255, 0.04);
+        cursor: pointer;
+        color: var(--gold);
+        font-size: clamp(12px, 3.5vw, 14px);
+        flex: 1;
+        max-width: 280px;
+      }
+      .btn.ghost {
+        background: transparent;
+        border: 1px solid rgba(255, 255, 255, 0.06);
+        color: var(--muted);
+      }
 
-    /* canvas layers */
-    canvas#embers, canvas#orbits, canvas#sparkles{position:fixed;inset:0;z-index:3;pointer-events:none}
+      /* canvas layers */
+      canvas#embers,
+      canvas#orbits,
+      canvas#sparkles {
+        position: fixed;
+        inset: 0;
+        z-index: 3;
+        pointer-events: none;
+      }
 
-    /* responsive */
-    @media (max-width:760px){
-      .num25{font-size:120px}
-      .centerpiece{height:260px}
-      h1{font-size:34px}
-      .verseText{font-size:18px}
-      .card{padding:22px}
-    }
-  </style>
-</head>
-<body>
-  <div class="wrap" id="wrap">
-    <div class="halo" aria-hidden></div>
+      /* invite button */
+      #inviteBtn {
+        background: linear-gradient(135deg, #ff9fb6, #ff6b95);
+        border: none;
+        color: white;
+        padding: 10px 12px;
+        border-radius: 999px;
+        font-weight: 700;
+        box-shadow: 0 10px 30px rgba(255, 107, 149, 0.16);
+        cursor: pointer;
+        font-size: clamp(12px, 3.5vw, 14px);
+        position: fixed;
+        right: 12px;
+        bottom: 12px;
+        z-index: 9;
+      }
 
-    <div class="card" role="main" aria-labelledby="greeting">
-      <div class="centerpiece" aria-hidden>
-        <div class="num25" id="num25">
-          <div class="fill">25</div>
-          <div class="shine" id="shine"></div>
+      /* ------------------ Enhanced Responsive ------------------ */
+      @media (max-width: 1024px) {
+        .card {
+          padding: 20px;
+        }
+        .centerpiece {
+          height: 240px;
+        }
+        .num25 {
+          font-size: clamp(90px, 22vw, 140px);
+        }
+        .num25 .orbit {
+          width: clamp(240px, 45vw, 340px);
+          height: clamp(240px, 45vw, 340px);
+        }
+        .halo {
+          width: clamp(280px, 55vw, 420px);
+          height: clamp(280px, 55vw, 420px);
+        }
+        h1 {
+          font-size: clamp(26px, 7vw, 36px);
+        }
+        .verseText {
+          font-size: clamp(13px, 3.8vw, 16px);
+        }
+        .verseBox {
+          padding: 10px;
+        }
+        .dedication {
+          font-size: clamp(11px, 3.5vw, 14px);
+          padding: 4px 8px;
+        }
+      }
+
+      @media (max-width: 760px) {
+        .wrap {
+          padding: 12px;
+        }
+        .card {
+          padding: 16px;
+        }
+        .centerpiece {
+          height: 200px;
+          margin-top: -10px;
+        }
+        .num25 {
+          font-size: clamp(80px, 20vw, 120px);
+        }
+        .num25 .orbit {
+          width: clamp(200px, 40vw, 300px);
+          height: clamp(200px, 40vw, 300px);
+        }
+        .halo {
+          width: clamp(240px, 50vw, 360px);
+          height: clamp(240px, 50vw, 360px);
+          top: 35%;
+        }
+        h1 {
+          font-size: clamp(24px, 6vw, 32px);
+        }
+        .subtitle {
+          font-size: clamp(11px, 3.2vw, 13px);
+        }
+        .verseText {
+          font-size: clamp(12px, 3.5vw, 15px);
+        }
+        .verseBox {
+          max-width: 100%;
+          padding: 8px;
+        }
+        .dedication {
+          font-size: clamp(11px, 3.2vw, 13px);
+          max-width: 100%;
+          padding: 4px 8px;
+        }
+        .controls {
+          flex-direction: column;
+          gap: 8px;
+        }
+        .btn {
+          max-width: 100%;
+        }
+        footer {
+          left: 10px;
+          bottom: 10px;
+          font-size: clamp(11px, 3vw, 12px);
+          flex-direction: column;
+          align-items: flex-start;
+          gap: 4px;
+        }
+        .swarmer {
+          width: clamp(24px, 7vw, 28px);
+          height: clamp(24px, 7vw, 28px);
+        }
+        #inviteBtn {
+          padding: 8px 10px;
+          font-size: clamp(11px, 3.2vw, 13px);
+        }
+      }
+
+      @media (max-width: 480px) {
+        .wrap {
+          padding: 8px;
+        }
+        .card {
+          padding: 12px;
+        }
+        .centerpiece {
+          height: 160px;
+          margin-top: -8px;
+        }
+        .num25 {
+          font-size: clamp(60px, 18vw, 100px);
+        }
+        .num25 .orbit {
+          width: clamp(160px, 35vw, 240px);
+          height: clamp(160px, 35vw, 240px);
+        }
+        .halo {
+          width: clamp(200px, 45vw, 300px);
+          height: clamp(200px, 45vw, 300px);
+          top: 30%;
+        }
+        h1 {
+          font-size: clamp(20px, 5.5vw, 28px);
+        }
+        .subtitle {
+          font-size: clamp(10px, 3vw, 12px);
+        }
+        .verseText {
+          font-size: clamp(11px, 3.2vw, 14px);
+        }
+        .verseRef {
+          font-size: clamp(10px, 3vw, 12px);
+        }
+        .verseBox {
+          padding: 6px;
+        }
+        .dedication {
+          font-size: clamp(10px, 3vw, 12px);
+          padding: 4px 6px;
+        }
+        footer {
+          font-size: clamp(10px, 2.8vw, 11px);
+        }
+        .swarmer {
+          width: clamp(20px, 6vw, 24px);
+          height: clamp(20px, 6vw, 24px);
+        }
+        #inviteBtn {
+          padding: 6px 8px;
+          font-size: clamp(10px, 3vw, 12px);
+        }
+      }
+    </style>
+  </head>
+  <body>
+    <div class="wrap" id="wrap">
+      <div class="halo" aria-hidden></div>
+
+      <div class="card" role="main" aria-labelledby="greeting">
+        <div class="centerpiece" aria-hidden>
+          <div class="num25" id="num25">
+            <div class="fill">25</div>
+            <div class="shine" id="shine"></div>
+          </div>
+
+          <!-- orbits canvas sits behind the 25 for flowing light orbits -->
+          <canvas id="orbits" aria-hidden></canvas>
         </div>
 
-        <!-- orbits canvas sits behind the 25 for flowing light orbits -->
-        <canvas id="orbits" aria-hidden></canvas>
+        <h1 id="greeting">Happy Silver Jubilee, Dear Essy ✨</h1>
+        <div class="subtitle">A quiet blessing, wrapped in light.</div>
+
+        <div class="verseBox" aria-label="Bible verse">
+          <div class="verseText" id="verseText">
+            " Hi Essy,The Lord bless you and keep you; the Lord make his face to shine
+            upon you and be gracious to you; the Lord lift up his countenance
+            upon you and give you peace."
+          </div>
+          <div class="verseRef" id="verseRef">Numbers 6:24–26</div>
+        </div>
+
+        <div class="dedication" id="dedication">
+          In this glow of silver, may thy joy rise like dawn after rain. The One
+          who blesses keep thee radiant, and in the quiet of each year, may love
+          find thee — as I have found light in thee.
+        </div>
+
+        <div class="controls" aria-hidden>
+          <button class="btn" id="playVerse">
+            Click Here to Hear the Blessing!
+          </button>
+          <button hidden class="btn ghost" id="musicBtn">
+            Play ambient music
+          </button>
+          <button class="btn ghost" id="downloadBtn">Save postcard</button>
+        </div>
       </div>
 
-      <h1 id="greeting">Happy Silver Jubilee, Essy ✨</h1>
-      <div class="subtitle">A quiet blessing, wrapped in light.</div>
+      <!-- visual canvases -->
+      <canvas id="embers" aria-hidden></canvas>
+      <canvas id="sparkles" aria-hidden></canvas>
 
-      <div class="verseBox" aria-label="Bible verse">
-        <div class="verseText" id="verseText">"The Lord bless you and keep you; the Lord make his face to shine upon you and be gracious to you; the Lord lift up his countenance upon you and give you peace."</div>
-        <div class="verseRef" id="verseRef">Numbers 6:24–26</div>
-      </div>
+      <!-- invite button -->
+      <button id="inviteBtn">💌 A gentle invitation</button>
 
-      <div class="dedication" id="dedication">
-        In this glow of silver, may thy joy rise like dawn after rain. The One who blesses keep thee radiant, and in the quiet of each year, may love find thee — as I have found light in thee.
-      </div>
+      <!-- footer with swarmer heart -->
+      <footer role="contentinfo">
+        <div>Made with care and love</div>
+        <div class="swarmer" aria-hidden>
+          <svg
+            width="18"
+            height="18"
+            viewBox="0 0 24 24"
+            fill="none"
+            xmlns="http://www.w3.org/2000/svg"
+            style="display: block"
+          >
+            <path
+              d="M12 21s-7-4.35-9-7.1C-0.1 9.5 4.2 4 8.76 6.3 10.2 7 12 9 12 9s1.8-2 3.24-2.7C19.8 4 24.1 9.5 21 13.9 19 16.65 12 21 12 21z"
+              fill="#ff8a2d"
+              opacity="0.98"
+            />
+          </svg>
+        </div>
+        <div style="margin-left: 10px; color: var(--muted)">— Felix</div>
+      </footer>
 
-      <div class="controls" aria-hidden>
-        <button class="btn" id="playVerse">Click Here to Hear the Blessing!</button>
-        <button hidden class="btn ghost" id="musicBtn">Play ambient music</button>
-        <button class="btn ghost" id="downloadBtn">Save postcard</button>
-      </div>
+      <!-- Audio -->
+      <audio id="bgAudio" loop preload="auto" crossorigin="anonymous">
+        <source
+          src="https://cdn.pixabay.com/download/audio/2023/04/01/audio_a3a2d3ee16.mp3?filename=ki-instrumental-ambient-enya-style-2321.mp3"
+          type="audio/mp3"
+        />
+      </audio>
     </div>
 
-    <!-- visual canvases -->
-    <canvas id="embers" aria-hidden></canvas>
-    <canvas id="sparkles" aria-hidden></canvas>
+    <script>
+      /* ------------------ CONFIG ------------------ */
+      const CONFIG = {
+        scripture: {
+          text: `Hi Essy,The Lord bless you and keep you; the Lord make his face to shine upon you and be gracious to you; the Lord lift up his countenance upon you and give you peace.`,
+          ref: "Numbers 6:24–26",
+        },
+        musicAutoAttempt: true,
+      };
 
-    <!-- invite button (one-click playful invitation) -->
-    <div style="position:fixed;right:20px;bottom:20px;z-index:9">
-      <button id="inviteBtn" style="background:linear-gradient(135deg,#ff9fb6,#ff6b95);border:none;color:white;padding:12px 14px;border-radius:999px;font-weight:700;box-shadow:0 10px 30px rgba(255,107,149,0.16);cursor:pointer">
-        💌 A gentle invitation
-      </button>
-    </div>
+      // Populate scripture
+      document.getElementById(
+        "verseText"
+      ).textContent = `\"${CONFIG.scripture.text}\"`;
+      document.getElementById("verseRef").textContent = CONFIG.scripture.ref;
 
-    <!-- footer with swarmer heart (ember orange) -->
-    <footer role="contentinfo">
-      <div>Made with care and love</div>
-      <div class="swarmer" aria-hidden style="margin-left:6px">
-        <!-- inline SVG heart for crispness -->
-        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg" style="display:block">
-          <path d="M12 21s-7-4.35-9-7.1C-0.1 9.5 4.2 4 8.76 6.3 10.2 7 12 9 12 9s1.8-2 3.24-2.7C19.8 4 24.1 9.5 21 13.9 19 16.65 12 21 12 21z" fill="#ff8a2d" opacity="0.98"/>
-        </svg>
-      </div>
-      <div style="margin-left:10px;color:var(--muted)">— Felix</div>
-    </footer>
-
-    <!-- Audio (royalty-free Enya-style ambient from Pixabay) -->
-    <audio id="bgAudio" loop preload="auto" crossorigin="anonymous">
-      <source src="https://cdn.pixabay.com/download/audio/2023/04/01/audio_a3a2d3ee16.mp3?filename=ki-instrumental-ambient-enya-style-2321.mp3" type="audio/mp3">
-      <!-- fallback: user will click Play -->
-    </audio>
-  </div>
-
-  <script>
-    /* ------------------ CONFIG ------------------ */
-    const CONFIG = {
-      scripture: {
-        text: `The Lord bless you and keep you; the Lord make his face to shine upon you and be gracious to you; the Lord lift up his countenance upon you and give you peace.`,
-        ref: 'Numbers 6:24–26'
-      },
-      musicAutoAttempt: true /* try autoplay; will fallback to user gesture if blocked */
-    };
-    /* -------------------------------------------- */
-
-    // populate scripture (keeps it easy to edit)
-    document.getElementById('verseText').textContent = `\"${CONFIG.scripture.text}\"`;
-    document.getElementById('verseRef').textContent = CONFIG.scripture.ref;
-
-    /* ---------------- 25 rotation & shimmer ---------------- */
-    const numEl = document.getElementById('num25');
-    const shine = document.getElementById('shine');
-    let rot = 0;
-    function rotateLoop() {
-      rot += 0.3; // degrees per frame-ish
-      const y = Math.sin(rot * Math.PI / 360) * 6;
-      numEl.style.transform = `rotateY(${rot}deg) rotateZ(${y}deg)`;
-      requestAnimationFrame(rotateLoop);
-    }
-    rotateLoop();
-
-    // shimmer sweep across 25
-    (function shimmer() {
-      const dur = 4200 + Math.random() * 2000;
-      shine.animate([{ transform: 'translateX(-220%)' }, { transform: 'translateX(220%)' }], { duration: dur, easing: 'cubic-bezier(.2,.9,.3,1)', iterations: 1 });
-      setTimeout(shimmer, dur + 800 + Math.random() * 1600);
-    })();
-
-    /* ---------------- orbits (flowing light rings) ---------------- */
-    const orbits = document.getElementById('orbits');
-    const orCtx = orbits.getContext('2d');
-    function resizeCanvases() {
-      orbits.width = innerWidth;
-      orbits.height = innerHeight;
-      embCanvas.width = innerWidth;
-      embCanvas.height = innerHeight;
-      sparkCanvas.width = innerWidth;
-      sparkCanvas.height = innerHeight;
-    }
-
-    // draw subtle flowing light rings behind 25
-    function drawOrbits() {
-      orCtx.clearRect(0,0,orbits.width,orbits.height);
-      const cx = orbits.width / 2;
-      const cy = orbits.height * 0.42;
-      const t = Date.now() / 8000;
-      for (let i = 0; i < 3; i++) {
-        const r = 120 + i * 60 + Math.sin(t * (0.8 + i*0.2)) * 10;
-        const hue = 30 + i * 20;
-        orCtx.beginPath();
-        orCtx.strokeStyle = `rgba(255,240,200,${0.06 + i*0.03})`;
-        orCtx.lineWidth = 1 + i*0.6;
-        orCtx.arc(cx, cy, r, 0, Math.PI*2);
-        orCtx.stroke();
+      /* ---------------- 25 rotation & shimmer ---------------- */
+      const numEl = document.getElementById("num25");
+      const shine = document.getElementById("shine");
+      let rot = 0;
+      function rotateLoop() {
+        rot += 0.3;
+        const y = Math.sin((rot * Math.PI) / 360) * 6;
+        numEl.style.transform = `rotateY(${rot}deg) rotateZ(${y}deg)`;
+        requestAnimationFrame(rotateLoop);
       }
-      requestAnimationFrame(drawOrbits);
-    }
+      rotateLoop();
 
-    /* ---------------- embers canvas ---------------- */
-    const embCanvas = document.getElementById('embers');
-    const embCtx = embCanvas.getContext('2d');
-    const sparkCanvas = document.getElementById('sparkles');
-    const sparkCtx = sparkCanvas.getContext('2d');
+      (function shimmer() {
+        const dur = 4200 + Math.random() * 2000;
+        shine.animate(
+          [
+            { transform: "translateX(-220%)" },
+            { transform: "translateX(220%)" },
+          ],
+          { duration: dur, easing: "cubic-bezier(.2,.9,.3,1)", iterations: 1 }
+        );
+        setTimeout(shimmer, dur + 800 + Math.random() * 1600);
+      })();
 
-    window.addEventListener('resize', resizeCanvases);
-    resizeCanvases();
+      /* ---------------- Canvas resizing ---------------- */
+      const orbits = document.getElementById("orbits");
+      const orCtx = orbits.getContext("2d");
+      const embCanvas = document.getElementById("embers");
+      const embCtx = embCanvas.getContext("2d");
+      const sparkCanvas = document.getElementById("sparkles");
+      const sparkCtx = sparkCanvas.getContext("2d");
 
-    // embers array
-    const embers = [];
-    function spawnEmber(x = null) {
-      const startX = x ?? (innerWidth * (0.25 + Math.random() * 0.5));
-      const startY = innerHeight + 12;
-      embers.push({
-        x: startX + (Math.random()*40 - 20),
-        y: startY + Math.random()*20,
-        vx: (Math.random()-0.5) * 0.4,
-        vy: - (Math.random()*1.6 + 0.6),
-        r: Math.random()*2.8 + 1.2,
-        life: Math.random()*120 + 80,
-        age: 0,
-        hue: 25 + Math.random()*20,
-        alpha: 0.9 + Math.random()*0.1
-      });
-    }
-
-    // seed embers
-    for(let i=0;i<36;i++) spawnEmber();
-
-    function updateEmbers() {
-      embCtx.clearRect(0,0,embCanvas.width, embCanvas.height);
-      for (let i = embers.length - 1; i >= 0; i--) {
-        const e = embers[i];
-        e.x += e.vx;
-        e.y += e.vy;
-        e.vy -= 0.002; // slight acceleration upward
-        e.age++;
-        const fade = Math.max(0, 1 - e.age / e.life);
-        const rad = e.r * (1 + (1 - fade) * 0.6);
-        const g = embCtx.createRadialGradient(e.x, e.y, 0, e.x, e.y, Math.max(10, rad*6));
-        g.addColorStop(0, `rgba(${255},${200},${120},${fade * e.alpha})`);
-        g.addColorStop(0.4, `rgba(${255},${150},${80},${fade * (e.alpha*0.7)})`);
-        g.addColorStop(1, 'rgba(0,0,0,0)');
-        embCtx.fillStyle = g;
-        embCtx.beginPath();
-        embCtx.arc(e.x, e.y, rad, 0, Math.PI*2);
-        embCtx.fill();
-        if (e.age > e.life || e.y < -60) embers.splice(i,1);
+      function resizeCanvases() {
+        orbits.width = innerWidth * window.devicePixelRatio;
+        orbits.height = innerHeight * window.devicePixelRatio;
+        embCanvas.width = innerWidth * window.devicePixelRatio;
+        embCanvas.height = innerHeight * window.devicePixelRatio;
+        sparkCanvas.width = innerWidth * window.devicePixelRatio;
+        sparkCanvas.height = innerHeight * window.devicePixelRatio;
+        orCtx.scale(window.devicePixelRatio, window.devicePixelRatio);
+        embCtx.scale(window.devicePixelRatio, window.devicePixelRatio);
+        sparkCtx.scale(window.devicePixelRatio, window.devicePixelRatio);
       }
-      if (Math.random() < 0.36) spawnEmber();
-      requestAnimationFrame(updateEmbers);
-    }
+      window.addEventListener("resize", resizeCanvases);
+      resizeCanvases();
 
-    updateEmbers();
-    drawOrbits();
-
-    /* ---------------- sparkles (floating white particles) ---------------- */
-    const sparks = [];
-    function spawnSpark() {
-      sparks.push({
-        x: Math.random()*innerWidth,
-        y: innerHeight + 10,
-        vy: -(0.2 + Math.random()*0.9),
-        r: Math.random()*1.6 + 0.6,
-        life: 140 + Math.random()*120,
-        age: 0,
-        alpha: 0.25 + Math.random()*0.65
-      });
-    }
-    for (let i=0;i<60;i++) spawnSpark();
-
-    function updateSparks() {
-      sparkCtx.clearRect(0,0,sparkCanvas.width,sparkCanvas.height);
-      for (let i = sparks.length - 1; i >= 0; i--) {
-        const s = sparks[i];
-        s.y += s.vy;
-        s.x += Math.sin((s.y + i)/60) * 0.6;
-        s.age++;
-        const fade = Math.max(0, 1 - s.age / s.life);
-        sparkCtx.globalAlpha = fade * s.alpha;
-        sparkCtx.beginPath();
-        sparkCtx.fillStyle = '#fff';
-        sparkCtx.arc(s.x, s.y, s.r, 0, Math.PI*2);
-        sparkCtx.fill();
-        if (s.age > s.life || s.y < -40) sparks.splice(i,1);
-      }
-      if (Math.random() < 0.7) spawnSpark();
-      requestAnimationFrame(updateSparks);
-    }
-    updateSparks();
-
-    /* ---------------- mouse trail of soft lights ---------------- */
-    const trail = [];
-    window.addEventListener('mousemove', (e) => {
-      trail.push({ x: e.clientX, y: e.clientY, r: 1.6 + Math.random()*1.6, life: 36 });
-      if (trail.length > 60) trail.shift();
-    });
-    function drawTrail() {
-      // draw onto spark canvas on top of sparks
-      for (let i = trail.length - 1; i >= 0; i--) {
-        const t = trail[i];
-        sparkCtx.beginPath();
-        sparkCtx.globalAlpha = (t.life/36) * 0.9;
-        sparkCtx.fillStyle = 'rgba(255,235,180,0.95)';
-        sparkCtx.arc(t.x, t.y, t.r, 0, Math.PI*2);
-        sparkCtx.fill();
-        t.life--;
-        if (t.life <= 0) trail.splice(i,1);
-      }
-      requestAnimationFrame(drawTrail);
-    }
-    drawTrail();
-
-    /* ---------------- audio handling ---------------- */
-    const audio = document.getElementById('bgAudio');
-    const musicBtn = document.getElementById('musicBtn');
-
-    function tryAutoPlay() {
-      if (!CONFIG.musicAutoAttempt) return;
-      const p = audio.play();
-      if (p !== undefined) {
-        p.then(() => {
-          // playing
-          musicBtn.textContent = 'Pause ambient music';
-        }).catch(() => {
-          // autoplay blocked — keep button for user to start
-          musicBtn.textContent = 'Play ambient music';
-        });
-      }
-    }
-    tryAutoPlay();
-
-    musicBtn.addEventListener('click', () => {
-      if (audio.paused) {
-        audio.play().then(() => {
-          musicBtn.textContent = 'Pause ambient music';
-        }).catch(() => {
-          // user gesture required
-        });
-      } else {
-        audio.pause();
-        musicBtn.textContent = 'Play ambient music';
-      }
-    });
-
-    /* ---------------- reading verse (speech) ---------------- */
-    document.getElementById('playVerse').addEventListener('click', () => {
-      const text = CONFIG.scripture.text + ' — Numbers six, twenty-four through twenty-six.';
-      if ('speechSynthesis' in window) {
-        const u = new SpeechSynthesisUtterance(text);
-        u.rate = 0.94; u.pitch = 0.98; u.lang = 'en-GB';
-        window.speechSynthesis.cancel();
-        window.speechSynthesis.speak(u);
-      } else {
-        alert(text);
-      }
-    });
-
-    /* ---------------- invite button behaviour ---------------- */
-    document.getElementById('inviteBtn').addEventListener('click', () => {
-      const ded = document.getElementById('dedication');
-      ded.textContent = `In this glow of silver, may thy joy rise like dawn after rain. The One who blesses keep thee radiant. If thy heart permits, I would be honored to walk with thee over coffee or a quiet evening.`;
-      const btn = document.getElementById('inviteBtn');
-      btn.textContent = 'Sent ♥';
-      btn.disabled = true;
-      // little confetti burst to celebrate
-      tinyConfettiBurst();
-    });
-
-    /* ---------------- tiny confetti burst ---------------- */
-    function tinyConfettiBurst() {
-      const c = document.createElement('canvas');
-      c.width = innerWidth; c.height = innerHeight;
-      c.style.position = 'fixed'; c.style.left = 0; c.style.top = 0; c.style.zIndex = 9999; c.style.pointerEvents = 'none';
-      document.body.appendChild(c);
-      const cc = c.getContext('2d');
-      const parts = [];
-      for (let i=0;i<48;i++){
-        parts.push({x: innerWidth/2 + (Math.random()-0.5)*220, y: innerHeight/2 + (Math.random()-0.5)*40, vx: (Math.random()-0.5)*6, vy: -Math.random()*6 - 1, r: 4+Math.random()*6, life: 60 + Math.random()*40, color: `hsl(${Math.random()*60+160},70%,60%)`});
-      }
-      function loop() {
-        cc.clearRect(0,0,c.width,c.height);
-        for (let i = parts.length - 1; i >= 0; i--) {
-          const p = parts[i];
-          p.x += p.vx; p.y += p.vy; p.vy += 0.25; p.life--;
-          cc.fillStyle = p.color;
-          cc.fillRect(p.x, p.y, p.r, p.r*0.6);
-          if (p.life <= 0) parts.splice(i,1);
+      /* ---------------- Orbits ---------------- */
+      function drawOrbits() {
+        orCtx.clearRect(0, 0, orbits.width, orbits.height);
+        const cx = orbits.width / (2 * window.devicePixelRatio);
+        const cy = orbits.height * 0.42 / window.devicePixelRatio;
+        const t = Date.now() / 8000;
+        for (let i = 0; i < 3; i++) {
+          const r = (100 + i * 50 + Math.sin(t * (0.8 + i * 0.2)) * 8) * window.devicePixelRatio;
+          const hue = 30 + i * 20;
+          orCtx.beginPath();
+          orCtx.strokeStyle = `rgba(255,240,200,${0.06 + i * 0.03})`;
+          orCtx.lineWidth = (1 + i * 0.5) * window.devicePixelRatio;
+          orCtx.arc(cx, cy, r, 0, Math.PI * 2);
+          orCtx.stroke();
         }
-        if (parts.length) requestAnimationFrame(loop);
-        else setTimeout(()=>c.remove(), 420);
+        requestAnimationFrame(drawOrbits);
       }
-      loop();
-    }
+      drawOrbits();
 
-    /* ---------------- download postcard (SVG) ---------------- */
-    document.getElementById('downloadBtn').addEventListener('click', () => {
-      const svg = `<svg xmlns='http://www.w3.org/2000/svg' width='1200' height='630'><foreignObject width='100%' height='100%'><div xmlns='http://www.w3.org/1999/xhtml' style='font-family:Inter, Playfair Display; background: linear-gradient(180deg,#071028,#2b1438); color:white; padding:36px; height:100%'>` +
-        `<h1 style='font-family:Dancing Script; font-size:44px; margin:0;'>Happy Silver Jubilee, Essy ✨</h1>` +
-        `<p style='margin-top:14px; font-family:Playfair Display; font-size:22px;'>\"${CONFIG.scripture.text}\"</p>` +
-        `<p style='margin-top:24px; font-size:16px; color:#cfd8e0'>Numbers 6:24–26</p>` +
-        `<p style='margin-top:30px; font-size:14px; color:#b3bfc9'>In this glow of silver, may thy joy rise like dawn after rain. — Felix</p>` +
-        `</div></foreignObject></svg>`;
-      const blob = new Blob([svg], {type: 'image/svg+xml;charset=utf-8'});
-      const url = URL.createObjectURL(blob);
-      const a = document.createElement('a'); a.href = url; a.download = 'essy-silver-jubilee.svg'; document.body.appendChild(a); a.click(); a.remove(); URL.revokeObjectURL(url);
-    });
-
-    /* ---------------- start small animations that depend on canvas size ---------------- */
-    // ensure canvases are sized
-    function ensureSizes() {
-      orbits.width = innerWidth; orbits.height = innerHeight;
-      embCanvas.width = innerWidth; embCanvas.height = innerHeight;
-      sparkCanvas.width = innerWidth; sparkCanvas.height = innerHeight;
-    }
-    ensureSizes();
-    window.addEventListener('resize', ensureSizes);
-
-    // start orbit/orbits drawing already called above via drawOrbits()
-
-    // keyboard accessibility: press 'r' to read verse; 'm' to toggle music
-    window.addEventListener('keydown', (e) => {
-      if (e.key.toLowerCase() === 'r') document.getElementById('playVerse').click();
-      if (e.key.toLowerCase() === 'm') document.getElementById('musicBtn').click();
-    });
-
-    // small entrance transition for main card
-    document.querySelector('.card').animate([{ opacity: 0, transform: 'translateY(18px)' }, { opacity: 1, transform: 'translateY(0)' }], { duration: 700, easing: 'cubic-bezier(.2,.9,.3,1)' });
-
-    // try one last autoplay attempt on first user gesture if initial blocked
-    function resumeAudioOnGesture() {
-      document.body.removeEventListener('pointerdown', resumeAudioOnGesture);
-      document.body.removeEventListener('keydown', resumeAudioOnGesture);
-      if (audio.paused) {
-        audio.play().then(()=>{ document.getElementById('musicBtn').textContent = 'Pause ambient music' }).catch(()=>{/* still blocked */});
+      /* ---------------- Embers ---------------- */
+      const embers = [];
+      function spawnEmber(x = null) {
+        const startX = x ?? innerWidth * (0.25 + Math.random() * 0.5);
+        const startY = innerHeight + 12;
+        embers.push({
+          x: startX + (Math.random() * 40 - 20),
+          y: startY + Math.random() * 20,
+          vx: (Math.random() - 0.5) * 0.3,
+          vy: -(Math.random() * 1.2 + 0.4),
+          r: Math.random() * 2 + 1,
+          life: Math.random() * 100 + 60,
+          age: 0,
+          hue: 25 + Math.random() * 20,
+          alpha: 0.8 + Math.random() * 0.1,
+        });
       }
-    }
-    document.body.addEventListener('pointerdown', resumeAudioOnGesture);
-    document.body.addEventListener('keydown', resumeAudioOnGesture);
 
-  </script>
-</body>
+      for (let i = 0; i < 24; i++) spawnEmber();
+
+      function updateEmbers() {
+        embCtx.clearRect(0, 0, embCanvas.width, embCanvas.height);
+        for (let i = embers.length - 1; i >= 0; i--) {
+          const e = embers[i];
+          e.x += e.vx;
+          e.y += e.vy;
+          e.vy -= 0.001;
+          e.age++;
+          const fade = Math.max(0, 1 - e.age / e.life);
+          const rad = e.r * (1 + (1 - fade) * 0.5) * window.devicePixelRatio;
+          const g = embCtx.createRadialGradient(
+            e.x * window.devicePixelRatio,
+            e.y * window.devicePixelRatio,
+            0,
+            e.x * window.devicePixelRatio,
+            e.y * window.devicePixelRatio,
+            Math.max(8, rad * 5)
+          );
+          g.addColorStop(0, `rgba(${255},${200},${120},${fade * e.alpha})`);
+          g.addColorStop(
+            0.4,
+            `rgba(${255},${150},${80},${fade * (e.alpha * 0.7)})`
+          );
+          g.addColorStop(1, "rgba(0,0,0,0)");
+          embCtx.fillStyle = g;
+          embCtx.beginPath();
+          embCtx.arc(
+            e.x * window.devicePixelRatio,
+            e.y * window.devicePixelRatio,
+            rad,
+            0,
+            Math.PI * 2
+          );
+          embCtx.fill();
+          if (e.age > e.life || e.y < -60) embers.splice(i, 1);
+        }
+        if (Math.random() < 0.2) spawnEmber();
+        requestAnimationFrame(updateEmbers);
+      }
+      updateEmbers();
+
+      /* ---------------- Sparkles ---------------- */
+      const sparks = [];
+      function spawnSpark() {
+        sparks.push({
+          x: Math.random() * innerWidth,
+          y: innerHeight + 10,
+          vy: -(0.15 + Math.random() * 0.6),
+          r: Math.random() * 1.2 + 0.4,
+          life: 100 + Math.random() * 80,
+          age: 0,
+          alpha: 0.2 + Math.random() * 0.5,
+        });
+      }
+      for (let i = 0; i < 40; i++) spawnSpark();
+
+      function updateSparks() {
+        sparkCtx.clearRect(0, 0, sparkCanvas.width, sparkCanvas.height);
+        for (let i = sparks.length - 1; i >= 0; i--) {
+          const s = sparks[i];
+          s.y += s.vy;
+          s.x += Math.sin((s.y + i) / 60) * 0.4;
+          s.age++;
+          const fade = Math.max(0, 1 - s.age / s.life);
+          sparkCtx.globalAlpha = fade * s.alpha;
+          sparkCtx.beginPath();
+          sparkCtx.fillStyle = "#fff";
+          sparkCtx.arc(
+            s.x * window.devicePixelRatio,
+            s.y * window.devicePixelRatio,
+            s.r * window.devicePixelRatio,
+            0,
+            Math.PI * 2
+          );
+          sparkCtx.fill();
+          if (s.age > s.life || s.y < -40) sparks.splice(i, 1);
+        }
+        if (Math.random() < 0.5) spawnSpark();
+        requestAnimationFrame(updateSparks);
+      }
+      updateSparks();
+
+      /* ---------------- Mouse trail ---------------- */
+      const trail = [];
+      window.addEventListener("mousemove", (e) => {
+        trail.push({
+          x: e.clientX,
+          y: e.clientY,
+          r: 1.2 + Math.random() * 1.2,
+          life: 24,
+        });
+        if (trail.length > 40) trail.shift();
+      });
+
+      function drawTrail() {
+        for (let i = trail.length - 1; i >= 0; i--) {
+          const t = trail[i];
+          sparkCtx.beginPath();
+          sparkCtx.globalAlpha = (t.life / 24) * 0.8;
+          sparkCtx.fillStyle = "rgba(255,235,180,0.9)";
+          sparkCtx.arc(
+            t.x * window.devicePixelRatio,
+            t.y * window.devicePixelRatio,
+            t.r * window.devicePixelRatio,
+            0,
+            Math.PI * 2
+          );
+          sparkCtx.fill();
+          t.life--;
+          if (t.life <= 0) trail.splice(i, 1);
+        }
+        requestAnimationFrame(drawTrail);
+      }
+      drawTrail();
+
+      /* ---------------- Audio handling ---------------- */
+      const audio = document.getElementById("bgAudio");
+      const musicBtn = document.getElementById("musicBtn");
+
+      function tryAutoPlay() {
+        if (!CONFIG.musicAutoAttempt) return;
+        const p = audio.play();
+        if (p !== undefined) {
+          p.then(() => {
+            musicBtn.textContent = "Pause ambient music";
+          }).catch(() => {
+            musicBtn.textContent = "Play ambient music";
+          });
+        }
+      }
+      tryAutoPlay();
+
+      musicBtn.addEventListener("click", () => {
+        if (audio.paused) {
+          audio
+            .play()
+            .then(() => {
+              musicBtn.textContent = "Pause ambient music";
+            })
+            .catch(() => {});
+        } else {
+          audio.pause();
+          musicBtn.textContent = "Play ambient music";
+        }
+      });
+
+      /* ---------------- Reading verse ---------------- */
+      document.getElementById("playVerse").addEventListener("click", () => {
+        const text =
+          CONFIG.scripture.text +
+          " — Numbers six, twenty-four through twenty-six.";
+        if ("speechSynthesis" in window) {
+          const u = new SpeechSynthesisUtterance(text);
+          u.rate = 0.94;
+          u.pitch = 0.98;
+          u.lang = "en-GB";
+          window.speechSynthesis.cancel();
+          window.speechSynthesis.speak(u);
+        } else {
+          alert(text);
+        }
+      });
+
+      /* ---------------- Invite button ---------------- */
+      document.getElementById("inviteBtn").addEventListener("click", () => {
+        const ded = document.getElementById("dedication");
+        ded.textContent = `In this glow of silver, may thy joy rise like dawn after rain. The One who blesses keep thee radiant. If thy heart permits, I would be honored to walk with thee over coffee or a quiet evening.`;
+        const btn = document.getElementById("inviteBtn");
+        btn.textContent = "Sent ♥";
+        btn.disabled = true;
+        tinyConfettiBurst();
+      });
+
+      /* ---------------- Tiny confetti burst ---------------- */
+      function tinyConfettiBurst() {
+        const c = document.createElement("canvas");
+        c.width = innerWidth * window.devicePixelRatio;
+        c.height = innerHeight * window.devicePixelRatio;
+        c.style.position = "fixed";
+        c.style.left = 0;
+        c.style.top = 0;
+        c.style.zIndex = 9999;
+        c.style.pointerEvents = "none";
+        document.body.appendChild(c);
+        const cc = c.getContext("2d");
+        cc.scale(window.devicePixelRatio, window.devicePixelRatio);
+        const parts = [];
+        for (let i = 0; i < 32; i++) {
+          parts.push({
+            x: innerWidth / 2 + (Math.random() - 0.5) * 180,
+            y: innerHeight / 2 + (Math.random() - 0.5) * 30,
+            vx: (Math.random() - 0.5) * 4,
+            vy: -Math.random() * 4 - 0.8,
+            r: 3 + Math.random() * 4,
+            life: 40 + Math.random() * 20,
+            color: `hsl(${Math.random() * 60 + 160},70%,60%)`,
+          });
+        }
+        function loop() {
+          cc.clearRect(0, 0, c.width, c.height);
+          for (let i = parts.length - 1; i >= 0; i--) {
+            const p = parts[i];
+            p.x += p.vx;
+            p.y += p.vy;
+            p.vy += 0.15;
+            p.life--;
+            cc.fillStyle = p.color;
+            cc.fillRect(p.x, p.y, p.r, p.r * 0.6);
+            if (p.life <= 0) parts.splice(i, 1);
+          }
+          if (parts.length) requestAnimationFrame(loop);
+          else setTimeout(() => c.remove(), 420);
+        }
+        loop();
+      }
+
+      /* ---------------- Download postcard ---------------- */
+      document.getElementById("downloadBtn").addEventListener("click", () => {
+        const svg =
+          `<svg xmlns='http://www.w3.org/2000/svg' width='1200' height='630'><foreignObject width='100%' height='100%'><div xmlns='http://www.w3.org/1999/xhtml' style='font-family:Inter, Playfair Display; background: linear-gradient(180deg,#071028,#2b1438); color:white; padding:36px; height:100%'>` +
+          `<h1 style='font-family:Dancing Script; font-size:44px; margin:0;'>Happy Silver Jubilee, Dear Essy ✨</h1>` +
+          `<p style='margin-top:14px; font-family:Playfair Display; font-size:22px;'>\"${CONFIG.scripture.text}\"</p>` +
+          `<p style='margin-top:24px; font-size:16px; color:#cfd8e0'>Numbers 6:24–26</p>` +
+          `<p style='margin-top:30px; font-size:14px; color:#b3bfc9'>In this glow of silver, may thy joy rise like dawn after rain. — Felix</p>` +
+          `</div></foreignObject></svg>`;
+        const blob = new Blob([svg], { type: "image/svg+xml;charset=utf-8" });
+        const url = URL.createObjectURL(blob);
+        const a = document.createElement("a");
+        a.href = url;
+        a.download = "essy-silver-jubilee.svg";
+        document.body.appendChild(a);
+        a.click();
+        a.remove();
+        URL.revokeObjectURL(url);
+      });
+
+      /* ---------------- Start animations ---------------- */
+      window.addEventListener("resize", resizeCanvases);
+
+      // Keyboard accessibility
+      window.addEventListener("keydown", (e) => {
+        if (e.key.toLowerCase() === "r")
+          document.getElementById("playVerse").click();
+        if (e.key.toLowerCase() === "m")
+          document.getElementById("musicBtn").click();
+      });
+
+      // Entrance animation
+      document.querySelector(".card").animate(
+        [
+          { opacity: 0, transform: "translateY(18px)" },
+          { opacity: 1, transform: "translateY(0)" },
+        ],
+        { duration: 700, easing: "cubic-bezier(.2,.9,.3,1)" }
+      );
+
+      // Resume audio on gesture
+      function resumeAudioOnGesture() {
+        document.body.removeEventListener("pointerdown", resumeAudioOnGesture);
+        document.body.removeEventListener("keydown", resumeAudioOnGesture);
+        if (audio.paused) {
+          audio
+            .play()
+            .then(() => {
+              document.getElementById("musicBtn").textContent =
+                "Pause ambient music";
+            })
+            .catch(() => {});
+        }
+      }
+      document.body.addEventListener("pointerdown", resumeAudioOnGesture);
+      document.body.addEventListener("keydown", resumeAudioOnGesture);
+    </script>
+  </body>
 </html>
