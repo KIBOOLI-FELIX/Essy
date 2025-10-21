@@ -516,17 +516,17 @@
       </footer>
 
       <!-- Audio -->
-      <!-- <audio id="bgAudio" loop preload="auto" crossorigin="anonymous">
+      <audio id="bgAudio" loop preload="auto" crossorigin="anonymous">
         <source
           src="https://cdn.pixabay.com/download/audio/2023/04/01/audio_a3a2d3ee16.mp3?filename=ki-instrumental-ambient-enya-style-2321.mp3"
           type="audio/mp3"
         />
-      </audio> -->
-      <audio id="bgAudio" loop preload="auto" crossorigin="anonymous">
+      </audio>
+      <!-- <audio id="bgAudio" loop preload="auto" crossorigin="anonymous">
         <source
          src="essy.aac" type="audio/aac"
         />
-      </audio>
+      </audio> -->
     </div>
 
     <script>
@@ -777,21 +777,21 @@
       });
 
       /* ---------------- Reading verse ---------------- */
-    //   document.getElementById("playVerse").addEventListener("click", () => {
-    //     const text =
-    //       CONFIG.scripture.text +
-    //       " — Numbers six, twenty-four through twenty-six.";
-    //     if ("speechSynthesis" in window) {
-    //       const u = new SpeechSynthesisUtterance(text);
-    //       u.rate = 0.94;
-    //       u.pitch = 0.98;
-    //       u.lang = "en-GB";
-    //       window.speechSynthesis.cancel();
-    //       window.speechSynthesis.speak(u);
-    //     } else {
-    //       alert(text);
-    //     }
-    //   });
+      document.getElementById("playVerse").addEventListener("click", () => {
+        const text =
+          CONFIG.scripture.text +
+          " — Numbers six, twenty-four through twenty-six.";
+        if ("speechSynthesis" in window) {
+          const u = new SpeechSynthesisUtterance(text);
+          u.rate = 0.94;
+          u.pitch = 0.98;
+          u.lang = "en-GB";
+          window.speechSynthesis.cancel();
+          window.speechSynthesis.speak(u);
+        } else {
+          alert(text);
+        }
+      });
 
       /* ---------------- Invite button ---------------- */
       document.getElementById("inviteBtn").addEventListener("click", () => {
